@@ -1,0 +1,162 @@
+.tableFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  margin-top: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 40px; 
+  flex-wrap: wrap; 
+  gap: 16px;
+}
+
+.paginationBlock {
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+}
+
+.rightControls {
+  display: flex;
+  align-items: center;
+  gap: 16px; 
+}
+
+.entriesCounter {
+  font-size: 14px;
+  color: #777777;
+  white-space: nowrap; 
+}
+
+.pageSizeSelect {
+  select {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    color: #333333;
+    background-color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: #1a73e8;
+    }
+  }
+}
+
+.pageBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: #333333;
+  font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 4px 8px;
+  min-width: 28px;
+  height: 32px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    color: #1a73e8;
+    background-color: #f1f3f5;
+  }
+
+  &:disabled {
+    color: #ced4da;
+    cursor: not-allowed;
+  }
+
+  &.activePage {
+    color: #1a73e8;
+    font-weight: 600;
+    background-color: #e8f0fe;
+  }
+}
+
+.arrowBtn {
+  color: #1a73e8;
+  font-size: 22px; 
+  font-weight: 300;
+  line-height: 1;
+  
+  &:disabled {
+    color: #ced4da;
+    background: transparent;
+  }
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: #6c757d;
+  min-width: 28px;
+  height: 32px;
+  padding: 0 4px;
+  user-select: none;
+}
+
+
+@media (max-width: 950px) {
+  .tableFooter {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    gap: 14px;
+  }
+
+  .paginationBlock {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .rightControls {
+    justify-content: center;
+    width: 100%;
+    gap: 20px; 
+  }
+}
+
+
+@media (max-width: 600px) {
+  .tableFooter {
+    padding: 0 16px;
+    gap: 16px;
+  }
+
+  .rightControls {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .pageSizeSelect {
+    width: 100%;
+    select {
+      width: 100%; 
+      text-align: center;
+    }
+  }
+
+  .paginationBlock {
+    gap: 4px;
+    
+    .pageBtn {
+      min-width: 24px;
+      height: 28px;
+      font-size: 13px;
+    }
+    
+    .arrowBtn {
+      font-size: 18px;
+    }
+  }
+}

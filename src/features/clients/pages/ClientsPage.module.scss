@@ -1,0 +1,490 @@
+.layoutWrapper {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 51px); 
+}
+.mobileCardsGrid {
+  display: none;
+}
+.contentArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  min-width: 0; 
+}
+
+.mainWorkspace {
+  padding: 30px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pageTitle {
+  font-size: 18px;
+  color: #1a73e8;
+  text-align: center;
+  font-weight: 500;
+  background-color: #fff;
+  margin: 0;        
+  padding: 24px 0;        
+  width: 100%;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 40px;
+  gap: 20px;
+  box-sizing: border-box;
+  flex-wrap: wrap; 
+}
+
+// 1. Поиск
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  
+  .searchIcon {
+    position: absolute;
+    left: 12px;
+    color: #adb5bd;
+  }
+  
+  input {
+    padding: 10px 12px 10px 38px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 220px; 
+    outline: none;
+    color: #495057;
+    transition: all 0.2s ease;
+
+    &:focus {
+      border-color: #1a73e8;
+    }
+  }
+}
+
+.balanceContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  max-width: 500px; 
+  margin: 0 20px;
+  
+  .balanceTitle {
+    font-size: 14px;
+    color: #999999;
+    margin-bottom: 6px;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .balanceLine {
+    width: 100%;
+    border-bottom: 1px solid #e9ecef;
+    margin-bottom: 12px;
+  }
+}
+
+.balanceViewer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #000000;
+  width: 100%;
+
+  .label {
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+
+  .smallInput {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    text-align: end;
+    background-color: #fff;
+    outline: none;
+    width: 60px;
+    flex-shrink: 0;
+  }
+
+  .balanceInput {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    text-align: end;
+    background-color: #fff;
+    outline: none;
+    color: #333;
+    flex: 1; 
+    min-width: 100px;
+  }
+}
+
+
+.actionGrid {
+  display: grid;
+  grid-template-columns: 140px 140px; 
+  grid-template-rows: 34px 34px;  
+  gap: 6px;                       
+  align-items: stretch;
+  height: 74px;                   
+  flex-shrink: 0;
+
+  button {
+   font-size: 13px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0 10px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    white-space: nowrap; 
+    width: 100%;
+    height: 100%;
+  }
+
+  .btnBlue {
+    grid-column: 1;
+    grid-row: 1 ; 
+    background-color: #1a73e8;
+    color: #ffffff;
+    border: none;
+    height: 100%; 
+  
+    &:hover { 
+      background-color: #0d5cb6; 
+    }
+  }
+  
+  .btnOutline {
+    grid-column: 2;
+    background-color: #ffffff;
+    color: #1a73e8;
+    border: 1px solid #1a73e8;
+    height: 100%;
+    
+    &:hover { 
+      background-color: #f8f9fa; 
+    }
+  }
+}
+// Контейнер таблицы
+.tableContainer {
+  width: 100%;
+  overflow-x: auto; 
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+  margin-top: 20px;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+// Стили самой таблицы
+.clientsTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+  color: #495057;
+
+  thead {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+
+    th {
+      padding: 14px 16px;
+      font-weight: 600;
+      color: #343a40;
+      white-space: nowrap;
+      background-color: #fff;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid #e9ecef;
+      transition: background-color 0.2s ease;
+      
+      &:nth-child(even) { background-color: #f8f9fa; }
+      &:hover { background-color: #f1f3f5; }
+      &:last-child { border-bottom: none; }
+    }
+
+    td {
+      padding: 12px 16px;
+      vertical-align: middle;
+      white-space: nowrap; 
+    }
+  }
+}
+
+.boldText { font-weight: 500; color: #212529; }
+.uppercaseText { text-transform: uppercase; }
+
+.rowFraud {
+  background-color: #fce8e6 !important;
+  color: #a51d24;
+  &:hover { background-color: #f9d5d2 !important; }
+}
+
+.rowHighRisk {
+  background-color: #fef7e0 !important;
+  color: #b06000;
+  &:hover { background-color: #fdecc6 !important; }
+}
+
+.rowApproved {
+  background-color: #f1fff0;
+  &:hover { background-color: #f1f3f5 !important; }
+}
+
+.statusText {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.iconRed { color: #c5221f; }
+.iconOrange { color: #b06000; }
+.iconGreen { color: #137333; }
+
+.linkText {
+  font-weight: 600;
+  color: #1a73e8;
+  cursor: pointer;
+  text-decoration: underline;
+  &:hover { color: #0d5cb6; }
+}
+
+
+@media (max-width: 1200px) {
+  .toolbar {
+    padding: 0 20px;
+  }
+  
+  .searchBox input {
+    width: 180px; 
+  }
+
+  .balanceContainer {
+    margin: 0 10px;
+  }
+}
+
+@media (max-width: 950px) {
+
+  .toolbar {
+    justify-content: flex-start; 
+    gap: 16px;
+    padding: 0 24px;
+  }
+
+  .searchBox {
+    flex: 1;
+    min-width: 180px;
+    
+    input {
+      width: 100%; // Поиск адаптируется под выделенный flex-блок
+    }
+  }
+
+  // 🎯 ИСПРАВЛЕНО: Убираем ограничение max-width и обнуляем лишние боковые маргины
+  .balanceContainer {
+    flex: 2;
+    max-width: none; // Снимаем десктопный блок в 500px, разрешая полную растяжку!
+    margin: 0;       // Убираем маргины, которые создавали оранжевые пустоты в инспекторе
+    width: 100%;
+  }
+
+  .balanceViewer {
+    gap: 8px;
+    width: 100%;
+
+    .balanceInput {
+      flex: 1; // Инпут баланса плавно забирает всё оставшееся в строке место
+    }
+  }
+
+  // Сетка кнопок красиво и ровно уходит на вторую строчку
+  .actionGrid {
+    width: 100%; 
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 34px 34px;  
+    gap: 6px;                       
+    height: 74px;                   
+    margin-top: 8px; 
+
+    button { 
+      width: 100%; 
+      height: 100%;                 
+    }
+
+    .btnBlue { 
+      grid-column: 1;
+      grid-row: 1; 
+    }
+
+    .btnOutline {
+      grid-column: 2;               
+    }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .mainWorkspace {
+    padding: 16px 0;
+  }
+
+  .pageTitle {
+    padding: 16px 0;
+    font-size: 16px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch; 
+    padding: 0 16px;
+    gap: 16px;
+  }
+
+  .searchBox {
+    width: 100%;
+    input { width: 100%; }
+  }
+
+  .balanceContainer {
+    margin: 0;
+    width: 100%;
+    align-items: stretch;
+    max-width: none;
+    
+    .balanceTitle { text-align: left; }
+  }
+
+  .balanceViewer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+
+    .label {
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .smallInput { 
+      width: 60px !important; 
+      flex-shrink: 0;
+    }
+
+  
+    .balanceInput { 
+      flex: 1 !important;     
+      width: auto !important; 
+      min-width: 0 !important; 
+    }
+  }
+
+  .actionGrid {
+    grid-template-columns: 1fr; 
+    grid-template-rows: repeat(3, 42px);
+    height: auto;
+    width: 100%;
+    gap: 8px;
+    margin-top: 0;
+
+    button {
+      width: 100% !important;
+      height: 42px !important;
+      grid-column: unset !important;
+      grid-row: unset !important;
+    }
+  }
+
+  .tableContainer {
+    border: none;
+    background: transparent;
+    margin-top: 16px;
+  }
+
+  .hideOnMobile {
+    display: none !important;
+  }
+
+  .mobileCardsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 16px;
+    margin-top: 16px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .mobileCard {
+    background: #ffffff;
+    padding: 14px 16px;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.015);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed #e9ecef;
+    padding-bottom: 6px;
+    font-size: 14px;
+  }
+
+  .cardBody {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+    color: #555555;
+
+    p {
+      margin: 0;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .statusFlex {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    
+    .statusText {
+      margin-left: 2px;
+    }
+  }
+}

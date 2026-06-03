@@ -1,0 +1,114 @@
+.caseItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f3f4;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  background-color: #ffffff;
+
+  &:hover {
+    background-color: #f8f9fa;
+  }
+}
+
+.activeCase {
+  background-color: #fdf2db !important; 
+  box-shadow: inset 3px 0 0 0 #f2994a; 
+  
+  .caseMainInfo .name {
+    color: #1a73e8;
+  }
+}
+
+.caseMainInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; 
+  flex: 1;
+
+  .name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #202124;
+    transition: color 0.2s;
+  }
+}
+.metaVerticalStack {
+  display: flex;
+  flex-direction: column; 
+  gap: 2px; 
+
+  .txId {
+    font-size: 12px;
+    font-weight: 500;
+    color: #5f6368;
+    text-transform: uppercase;
+  }
+
+  .date {
+    font-size: 11px;
+    color: #80868b;
+    font-weight: 400;
+  }
+}
+.caseRightSide {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.badgeAndAmount {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+
+  .amount {
+    font-size: 15px;
+    font-weight: 700;
+    color: #6c757d ;
+  }
+}
+
+.typeBadge {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.cashOut {
+  background-color: #fce8e6;
+  color: #a51d24;
+}
+
+.cashIn {
+  background-color: #e8f0fe;
+  color: #1a73e8;
+}
+
+.scoreSquare {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 42px;
+}
+
+.fraudScore {
+  background-color: #fce8e6;
+  color: #c5221f;
+}
+
+.highRiskScore {
+  background-color: #fceaad;
+  color: #b06000;
+}

@@ -1,0 +1,228 @@
+.dashboardContainer {
+  padding: 30px 40px;
+  width: 100%;
+  height: calc(100vh - 51px); 
+  max-height: calc(100vh - 51px); 
+  overflow: hidden;               
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.dashboardTitle {
+  font-size: 16px;
+  color: #1a73e8;
+  font-weight: 500;
+  margin: 0 0 24px 0;
+  letter-spacing: 0.5px;
+}
+
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  grid-template-rows: auto 1fr; 
+  gap: 20px;
+  width: 100%;
+  flex: 1;
+  min-height: 0; 
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 40px 48px 24px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+  box-sizing: border-box;
+  height: 100%; 
+  overflow: hidden;
+  gap: 10px;
+}
+
+.cardWithAction {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-bottom: 24px; 
+}
+
+.mainPieCard {
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; 
+  padding: 30px 24px 40px 24px; 
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.cardTitle {
+  font-size: 15px;
+  color: #333333;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+}
+
+.pieChartWrapper {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  width: 100%;
+  margin-top: auto; 
+  margin-bottom: 0; 
+  min-height: 0; 
+}
+
+.pieCounterSection {
+  width: 100%;
+  max-width: 280px;       
+  margin-top: 30px;       
+  margin-bottom: auto; 
+  align-self: center;     
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  padding-left: 15px;
+}
+
+
+.mainTotalValue {
+  font-size: 48px; 
+  color: #1a202c;
+  font-weight: 400; 
+  margin: 0 0 16px 0;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.legendList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; 
+  width: 100%;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px; 
+  color: #333333;
+  font-weight: 400;
+
+  .dot {
+    width: 10px; 
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0; 
+  }
+  
+  .dotDeposits { background-color: #1a73e8; }
+  .dotLoans { background-color: #7bb1f5; }
+  .dotWithdrawals { background-color: #cbdff9; }
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px; 
+  background: transparent !important; 
+  border-radius: 0;
+
+  &.iconBlue { color: #7bb1f5; }
+  &.iconGreen { color: #34a853; }
+  &.iconLightBlue { color: #7bb1f5; }
+  &.iconRed { color: #ec5d5d; }      
+  &.iconOrange { color: #f4b400; }   
+}
+
+.cardContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  text-align: left;        
+  padding-left: 4px;
+}
+
+.cardValue {
+  font-size: 52px;         
+  color: #1a202c;
+  font-weight: 400;        
+  margin: 0 0 6px 0; 
+  line-height: 1.1;  
+  text-align: left;
+}
+
+.cardSub {
+  font-size: 20px; 
+  color: #000000; 
+  margin-top: 5px;
+  text-align: left;
+}
+
+.cardSubCenter {
+  font-size: 20px;
+  color: #000000;
+  margin: 0 0 auto 0; 
+  text-align: center; 
+  width: 100%;
+}
+
+.progressCircleWrapper {
+  width: 100%;
+  margin-top: auto; 
+  margin-bottom: 16px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progressCircle {
+  width: 140px;        
+  height: 140px;       
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;      
+}
+
+.analyzeBtn {
+  width: 85%;
+  background-color: #ffffff;
+  border: 1px solid #1a73e8;
+  color: #1a73e8;
+  padding: 8px 0;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 2px;
+  cursor: pointer;
+  align-items: center;
+  transition: all 0.2s ease;
+  align-self: center;
+  height: 43px;
+  margin-top: auto; 
+
+  &:hover {
+    background-color: #f8f9fa;
+    border-color: #1557b0;
+    color: #1557b0;
+  }
+}
+
+:global {
+  .CircularProgressbar-text {
+    font-weight: 500 !important;
+    font-family: inherit;      
+    dominant-baseline: middle; 
+    text-anchor: middle;       
+  }
+}

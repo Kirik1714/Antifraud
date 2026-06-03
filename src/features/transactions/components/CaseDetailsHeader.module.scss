@@ -1,0 +1,152 @@
+.heroCard {
+  border-radius: 4px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+}
+
+.isFraud {
+  background-color: #fce8e6;
+  border-color: #fad2cf;
+
+  .heroScoreSquare {
+    background-color: #f9d5d2;
+    color: #c5221f;
+  }
+  .heroAmount {
+    color: #c5221f;
+  }
+}
+
+.isHighRisk {
+  background-color: #fff7e6;
+  border-color: #fcebb3;
+
+  .heroScoreSquare {
+    background-color: #fceaad;
+    color: #b06000;
+  }
+  .heroAmount {
+    color: #4a5568; 
+  }
+}
+
+.heroLeftContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.heroScoreSquare {
+  width: 46px;
+  height: 46px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  flex-shrink: 0;
+}
+
+.heroMetaText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .clientTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #202124;
+    text-decoration: underline; 
+    cursor: pointer;
+  }
+}
+
+.heroSubRow {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  color: #70757a;
+}
+
+.heroRightContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.heroTypeBadge {
+  background-color: #ffffff;
+  color: #5f6368;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid #dadce0;
+  font-weight: 500;
+}
+
+.heroAmount {
+  font-size: 24px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.currencySign {
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 2px;
+  position: relative;
+  top: 2px;
+}
+
+
+@media (max-width: 520px) {
+  .heroCard {
+    flex-direction: column-reverse; 
+    align-items: flex-start;
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .heroLeftContainer {
+    width: 100%;
+    gap: 12px;
+    
+    .heroScoreSquare {
+      width: 40px;
+      height: 40px;
+      font-size: 14px;
+    }
+
+    .heroMetaText .clientTitle {
+      font-size: 17px; 
+    }
+    
+    .heroSubRow {
+      font-size: 12px;
+    }
+  }
+
+  .heroRightContainer {
+    width: 100%;
+    flex-direction: row-reverse; 
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.08); 
+    padding-bottom: 10px;
+    gap: 0;
+
+    .heroAmount {
+      font-size: 21px; 
+    }
+  }
+}
