@@ -11,11 +11,11 @@ import LoginPage from "../features/auth/pages/LoginPage";
 import RegisterPage from "../features/auth/pages/RegisterPage";
 import ClientsPage from "../features/clients/pages/ClientsPage";
 import TransactionReviewPage from "../features/transactions/pages/TransactionReviewPage";
+import DashboardPage from "../features/dashboard/pages/DashboardPage";
 
 import ProtectedRoute from "../components/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute";
 import MainLayout from "../components/layout/MainLayout";
-import DashboardPage from "../features/dashboard/pages/DashboardPage";
 
 export default function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -23,26 +23,27 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route element={<MainLayout />}>
-          <Route
-            path="/"
-            element={
-              <Navigate to={isAuthenticated ? "/clients" : "/login"} replace />
-            }
-          />
+        <Route
+          path="/"
+          element={
+            <Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />
+          }
+        />
 
-          <Route element={<PublicRoute isAuthenticated={isAuthenticated} />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-          </Route>
+        <Route element={<PublicRoute isAuthenticated={isAuthenticated} />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
 
-          <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+        <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+          <Route element={<MainLayout />}>
+            <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/clients" element={<ClientsPage />} />
             <Route path="/transactions" element={<TransactionReviewPage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
           </Route>
         </Route>
 
+        {/* Подстраховка от 404 */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
