@@ -11,8 +11,8 @@ module.exports = {
     clean: true,
   },
 
-  mode: "development",
-  devtool: "inline-source-map",
+mode: process.env.NODE_ENV === "production" ? "production" : "development",
+devtool: process.env.NODE_ENV === "production" ? false : "inline-source-map",
 
   devServer: {
     port: 3000,
