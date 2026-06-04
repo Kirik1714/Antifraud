@@ -199,6 +199,9 @@
   overflow-y: auto;
   overflow-x: hidden;
   box-sizing: border-box;
+  &:has(.dashboardContainer) {
+    overflow-y: hidden;
+  }
 }
 
 .overlay {
