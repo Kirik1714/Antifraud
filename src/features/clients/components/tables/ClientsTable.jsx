@@ -49,14 +49,14 @@ export default function ClientsTable({ filteredUsers, deposits, withdraws, loans
                 <td className={styles.uppercaseText}>{user.address?.stateCode || 'NY'}</td>
                 <td>{user.address?.address || 'N/A'}</td>
                 <td>{user.phone}</td>
-                <td className={styles.boldText} style={{ color: '#137333' }}>
+                <td className={`${styles.boldText} ${styles.balancePositive}`}>
                   {calculateUserBalance(user.id)}
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="7" style={{ textAlign: 'center', padding: '20px' }}>
+              <td colSpan="7" className={styles.emptyRow}>
                 No clients found
               </td>
             </tr>

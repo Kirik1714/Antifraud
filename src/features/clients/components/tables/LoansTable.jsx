@@ -55,7 +55,7 @@ export default function LoansTable({ transactions }) {
           <div key={tx.id} className={`${styles.mobileCard} ${getRowClass(tx.status)}`}>
             <div className={styles.cardHeader}>
               <span className={styles.linkText}>LOAN #{tx.id}</span>
-              <span className={styles.cardAmount} style={{ fontWeight: 600 }}>
+              <span className={styles.boldText}>
                 ${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
               </span>
             </div>

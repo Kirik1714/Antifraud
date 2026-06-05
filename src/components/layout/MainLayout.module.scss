@@ -197,11 +197,9 @@
   min-height: 0;
   min-width: 0;
   overflow-y: auto;
-  overflow-x: hidden;
-  box-sizing: border-box;
-  &:has(.dashboardContainer) {
-    overflow-y: hidden;
-  }
+  // overflow-x: hidden;
+  // box-sizing: border-box;
+ 
 }
 
 .overlay {

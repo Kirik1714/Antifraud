@@ -3,9 +3,11 @@
   width: 100%;
   min-height: calc(100vh - 51px); 
 }
+
 .mobileCardsGrid {
   display: none;
 }
+
 .contentArea {
   flex: 1;
   display: flex;
@@ -44,7 +46,6 @@
   flex-wrap: wrap; 
 }
 
-// 1. Поиск
 .searchBox {
   position: relative;
   display: flex;
@@ -108,7 +109,6 @@
     white-space: nowrap;
   }
 
-
   .smallInput {
     border: 1px solid #ced4da;
     border-radius: 4px;
@@ -135,7 +135,6 @@
   }
 }
 
-
 .actionGrid {
   display: grid;
   grid-template-columns: 140px 140px; 
@@ -146,7 +145,7 @@
   flex-shrink: 0;
 
   button {
-   font-size: 13px;
+    font-size: 13px;
     border-radius: 4px;
     cursor: pointer;
     font-weight: 500;
@@ -185,7 +184,7 @@
     }
   }
 }
-// Контейнер таблицы
+
 .tableContainer {
   width: 100%;
   overflow-x: auto; 
@@ -197,7 +196,6 @@
   -webkit-overflow-scrolling: touch;
 }
 
-// Стили самой таблицы
 .clientsTable {
   width: 100%;
   border-collapse: collapse;
@@ -266,6 +264,7 @@
 .iconRed { color: #c5221f; }
 .iconOrange { color: #b06000; }
 .iconGreen { color: #137333; }
+.iconBlue { color: #1a73e8; }
 
 .linkText {
   font-weight: 600;
@@ -275,6 +274,118 @@
   &:hover { color: #0d5cb6; }
 }
 
+.emptyRow {
+  text-align: center;
+  padding: 20px;
+}
+
+.balancePositive {
+  color: #137333;
+}
+
+.amountDeposit {
+  color: #137333;
+}
+
+.amountWithdraw {
+  color: #c5221f;
+}
+
+.amountDefault {
+  color: #000000;
+}
+
+.statusApproved {
+  color: #137333;
+}
+
+.statusHighRisk {
+  color: #b06000;
+}
+
+.statusFraud {
+  color: #c5221f;
+}
+
+.statusTextWrapper {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.statusFraudBorder {
+  border-left: 4px solid #c5221f;
+}
+
+.statusHighRiskBorder {
+  border-left: 4px solid #b06000;
+}
+
+.statusApprovedBorder {
+  border-left: 4px solid #137333;
+}
+
+.mobileClientCard {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.mobileClientCardHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.mobileClientCardName {
+  默默: 600;
+  font-weight: 600;
+  color: #212529;
+  font-size: 15px;
+}
+
+.mobileClientCardBody {
+  font-size: 13px;
+  color: #666666;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobileClientCardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 16px;
+  margin-top: 16px;
+}
+
+.mobileStatusTextWrapper {
+  display: inline-flex;
+  margin-left: 6px;
+  font-weight: 500;
+  align-items: center;
+  gap: 2px;
+
+  svg {
+    margin-right: 2px;
+  }
+}
+
+.centered {
+  margin: auto;
+  font-size: 16px;
+  color: #495057;
+}
+
+.centeredError {
+  margin: auto;
+  font-size: 16px;
+  color: #dc3545;
+}
 
 @media (max-width: 1200px) {
   .toolbar {
@@ -291,7 +402,6 @@
 }
 
 @media (max-width: 950px) {
-
   .toolbar {
     justify-content: flex-start; 
     gap: 16px;
@@ -303,15 +413,14 @@
     min-width: 180px;
     
     input {
-      width: 100%; // Поиск адаптируется под выделенный flex-блок
+      width: 100%;
     }
   }
 
-  // 🎯 ИСПРАВЛЕНО: Убираем ограничение max-width и обнуляем лишние боковые маргины
   .balanceContainer {
     flex: 2;
-    max-width: none; // Снимаем десктопный блок в 500px, разрешая полную растяжку!
-    margin: 0;       // Убираем маргины, которые создавали оранжевые пустоты в инспекторе
+    max-width: none;
+    margin: 0;
     width: 100%;
   }
 
@@ -320,11 +429,10 @@
     width: 100%;
 
     .balanceInput {
-      flex: 1; // Инпут баланса плавно забирает всё оставшееся в строке место
+      flex: 1;
     }
   }
 
-  // Сетка кнопок красиво и ровно уходит на вторую строчку
   .actionGrid {
     width: 100%; 
     grid-template-columns: 1fr 1fr; 
@@ -335,7 +443,7 @@
 
     button { 
       width: 100%; 
-      height: 100%;                 
+      height: 100%;                                  
     }
 
     .btnBlue { 
@@ -348,7 +456,6 @@
     }
   }
 }
-
 
 @media (max-width: 768px) {
   .mainWorkspace {
@@ -398,7 +505,6 @@
       flex-shrink: 0;
     }
 
-  
     .balanceInput { 
       flex: 1 !important;     
       width: auto !important; 

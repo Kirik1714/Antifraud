@@ -3,10 +3,16 @@ import styles from '../../pages/ClientsPage.module.scss';
 import { ArrowUpRight, ArrowDownLeft, Percent } from 'lucide-react';
 
 export default function HistoryTable({ transactions }) {
-  const getStatusColor = (status) => {
-    if (status === 'Fraud') return '#c5221f';
-    if (status === 'High Risk') return '#b06000';
-    return '#137333';
+  const getStatusClass = (status) => {
+    if (status === 'Fraud') return styles.statusFraud;
+    if (status === 'High Risk') return styles.statusHighRisk;
+    return styles.statusApproved;
+  };
+
+  const getAmountClass = (type) => {
+    if (type === 'Deposit') return styles.amountDeposit;
+    if (type === 'Withdraw') return styles.amountWithdraw;
+    return styles.amountDefault;
   };
 
   return (
@@ -28,21 +34,19 @@ export default function HistoryTable({ transactions }) {
               <td className={styles.linkText}>{tx.id}</td>
               <td>User #{tx.clientId}</td>
               <td>
-                <span className={styles.statusText} style={{ fontWeight: 600 }}>
-                  {tx.operationType === 'Deposit' && <ArrowDownLeft size={14} style={{ color: '#137333' }} />}
-                  {tx.operationType === 'Withdraw' && <ArrowUpRight size={14} style={{ color: '#c5221f' }} />}
-                  {tx.operationType === 'Loan' && <Percent size={14} style={{ color: '#1a73e8' }} />}
+                <span className={styles.statusTextWrapper}>
+                  {tx.operationType === 'Deposit' && <ArrowDownLeft size={14} className={styles.iconGreen} />}
+                  {tx.operationType === 'Withdraw' && <ArrowUpRight size={14} className={styles.iconRed} />}
+                  {tx.operationType === 'Loan' && <Percent size={14} className={styles.iconBlue} />}
                   {tx.operationType}
                 </span>
               </td>
-              <td className={styles.boldText} style={{
-                color: tx.operationType === 'Deposit' ? '#137333' : tx.operationType === 'Withdraw' ? '#c5221f' : '#000000'
-              }}>
+              <td className={`${styles.boldText} ${getAmountClass(tx.operationType)}`}>
                 {tx.operationType === 'Deposit' ? '+' : tx.operationType === 'Withdraw' ? '-' : ''}
                 ${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
               </td>
               <td>{tx.method}</td>
-              <td className={styles.boldText} style={{ color: getStatusColor(tx.status) }}>
+              <td className={`${styles.boldText} ${getStatusClass(tx.status)}`}>
                 {tx.status}
               </td>
             </tr>
@@ -52,13 +56,10 @@ export default function HistoryTable({ transactions }) {
 
       <div className={styles.mobileCardsGrid}>
         {transactions?.map((tx) => (
-          <div key={tx.id} className={styles.mobileCard} style={{ borderLeft: `4px solid ${getStatusColor(tx.status)}` }}>
+          <div key={tx.id} className={`${styles.mobileCard} ${getStatusClass(tx.status + 'Border')}`}>
             <div className={styles.cardHeader}>
               <span className={styles.linkText}>TX #{tx.id}</span>
-              <span className={styles.cardAmount} style={{
-                fontWeight: 600,
-                color: tx.operationType === 'Deposit' ? '#137333' : tx.operationType === 'Withdraw' ? '#c5221f' : '#000000'
-              }}>
+              <span className={`${styles.cardAmount} ${getAmountClass(tx.operationType)}`}>
                 {tx.operationType === 'Deposit' ? '+' : tx.operationType === 'Withdraw' ? '-' : ''}
                 ${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
               </span>
@@ -67,15 +68,15 @@ export default function HistoryTable({ transactions }) {
               <p><b>Client:</b> User #{tx.clientId}</p>
               <p>
                 <b>Type:</b> 
-                <span className={styles.statusText} style={{ display: 'inline-flex', marginLeft: '6px', fontWeight: 500 }}>
-                  {tx.operationType === 'Deposit' && <ArrowDownLeft size={14} style={{ color: '#137333', marginRight: '2px' }} />}
-                  {tx.operationType === 'Withdraw' && <ArrowUpRight size={14} style={{ color: '#c5221f', marginRight: '2px' }} />}
-                  {tx.operationType === 'Loan' && <Percent size={14} style={{ color: '#1a73e8', marginRight: '2px' }} />}
+                <span className={styles.mobileStatusTextWrapper}>
+                  {tx.operationType === 'Deposit' && <ArrowDownLeft size={14} className={styles.iconGreen} />}
+                  {tx.operationType === 'Withdraw' && <ArrowUpRight size={14} className={styles.iconRed} />}
+                  {tx.operationType === 'Loan' && <Percent size={14} className={styles.iconBlue} />}
                   {tx.operationType}
                 </span>
               </p>
               <p><b>Method:</b> {tx.method}</p>
-              <p><b>Status:</b> <span style={{ fontWeight: 600, color: getStatusColor(tx.status) }}>{tx.status}</span></p>
+              <p><b>Status:</b> <span className={`${styles.boldText} ${getStatusClass(tx.status)}`}>{tx.status}</span></p>
             </div>
           </div>
         ))}

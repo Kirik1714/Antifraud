@@ -15,6 +15,10 @@ export default function WithdrawTable({ transactions }) {
     }
   };
 
+  const getMobileAmountClass = (status) => {
+    return status === 'Fraud' ? styles.amountWithdraw : styles.amountDefault;
+  };
+
   const renderStatusIcon = (status) => {
     if (status === 'Approved') return <ShieldCheck size={16} className={styles.iconGreen} />;
     if (status === 'High Risk') return <AlertTriangle size={16} className={styles.iconOrange} />;
@@ -60,7 +64,7 @@ export default function WithdrawTable({ transactions }) {
               <span className={styles.linkText} onClick={() => navigate(`/transactions?txId=${tx.id}`)}>
                 TX #{tx.id}
               </span>
-              <span className={styles.cardAmount} style={{ color: tx.status === 'Fraud' ? '#c5221f' : '#333', fontWeight: 600 }}>
+              <span className={`${styles.cardAmount} ${getMobileAmountClass(tx.status)}`}>
                 -${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
               </span>
             </div>

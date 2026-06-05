@@ -10,7 +10,6 @@ export default function TopNavigation({ activeTab, setActiveTab }) {
         <button 
           key={idx} 
           className={`${styles.tab} ${tab === activeTab ? styles.active : ''}`}
-       
           onClick={() => setActiveTab(tab)}
         >
           {tab}

@@ -20,7 +20,7 @@ export default function DepositTable({ transactions }) {
             <tr key={tx.id} className={styles.rowApproved}>
               <td className={styles.linkText}>{tx.id}</td>
               <td className={styles.boldText}>User #{tx.clientId}</td>
-              <td className={styles.boldText} style={{ color: '#137333' }}>
+              <td className={`${styles.boldText} ${styles.amountDeposit}`}>
                 +${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
               </td>
               <td>{tx.method}</td>
@@ -39,7 +39,7 @@ export default function DepositTable({ transactions }) {
           <div key={tx.id} className={`${styles.mobileCard} ${styles.rowApproved}`}>
             <div className={styles.cardHeader}>
               <span className={styles.linkText}>TX #{tx.id}</span>
-              <span className={styles.cardAmount} style={{ color: '#137333', fontWeight: 600 }}>
+              <span className={`${styles.cardAmount} ${styles.amountDeposit}`}>
                 +${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
               </span>
             </div>

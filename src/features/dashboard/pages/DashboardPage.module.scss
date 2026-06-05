@@ -20,6 +20,21 @@
   }
 }
 
+.containerCentered {
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingText {
+  margin-top: 16px;
+  color: #1a73e8;
+  font-weight: 500;
+}
+
+.spinnerRotate {
+  animation: spin 2s linear infinite;
+}
+
 .dashboardTitle {
   font-size: 16px;
   color: #1a73e8;
@@ -335,6 +350,12 @@
   }
 }
 
+.progressCircleSizeHost {
+  width: 140px; 
+  height: 140px; 
+  position: relative;
+}
+
 .analyzeBtn {
   width: 100%;
   background-color: #ffffff;
@@ -360,6 +381,11 @@
     margin-top: 12px;
     align-self: center;
   }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 :global {

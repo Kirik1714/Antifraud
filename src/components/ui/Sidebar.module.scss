@@ -1,15 +1,12 @@
-.mobileText {
-  display: none;
-}
 .sidebar {
-  width: 260px;
+width: 260px;
   background-color: #1a73e8;
   color: #ffffff;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%; 
   box-sizing: border-box;
-  padding: 24px 0;
+  padding: 24px 0; 
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-x: hidden;
   flex-shrink: 0;
@@ -59,17 +56,26 @@
   }
 }
 
+// 🎯 Поведение свернутого десктопного сайдбара
 .sidebar.collapsed {
   width: 68px;
+  padding: 16px 0 24px 0; // 🎯 Перенесли сюда отступ для страницы транзакций на десктопе
+
+  .sidebarHeader {
+    padding: 0;
+    justify-content: center;
+  }
+
+  .menuText, .arrow {
+    display: none; 
+  }
 
   .menuItem {
     justify-content: center;
     padding: 12px 0;
-    
     svg { margin: 0; }
   }
 }
-
 .menuGroup {
   display: flex;
   flex-direction: column;
@@ -90,7 +96,7 @@
   width: 100%;
   box-sizing: border-box;
 
-  span {
+  .menuText {
     white-space: nowrap;
   }
 
@@ -112,29 +118,42 @@
   }
 }
 
-
+// 🎯 МОБИЛЬНЫЕ СТИЛИ ДЛЯ БУРГЕРА
 @media (max-width: 768px) {
   .sidebar, 
   .sidebar.collapsed {
     width: 100% !important;
     height: 100% !important;
-    padding: 24px 0 !important;
+    padding: 16px 0 !important; // 🎯 Единый, стабильный отступ сверху на мобилках для ВСЕХ страниц
+
+    .sidebarHeader {
+      display: none; 
+    }
+
+    .menuGroup {
+      padding-top: 0 !important; // Сбрасываем любые смещения группы меню
+    }
+
     .menuItem {
       justify-content: flex-start !important;
-      padding: 12px 24px !important;
+      padding: 14px 24px !important;
       gap: 16px !important; 
 
       svg {
         margin: 0 !important; 
       }
     }
-    
-  }
 
-  .mobileText {
-    display: inline-block !important;
-    color: #ffffff !important;
-    font-size: 15px !important;
-    font-weight: 500 !important;
+    .menuText {
+      display: inline-block !important; 
+      color: #ffffff !important;
+      font-size: 15px !important;
+      font-weight: 500 !important;
+    }
+
+    .arrow {
+      display: inline-block !important;
+      margin-left: auto;
+    }
   }
 }

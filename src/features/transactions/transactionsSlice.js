@@ -70,7 +70,6 @@ const transactionsSlice = createSlice({
         (state, action) => {
           const savedStatuses = loadStoredStatuses();
 
-          // Перезаписываем массив из API, подставляя наши сохраненные статусы
           state.withdraws = action.payload.map(tx => ({
             ...tx,
             status: savedStatuses[tx.id] ? savedStatuses[tx.id] : tx.status

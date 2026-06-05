@@ -1,12 +1,23 @@
+:global {
+  html, 
+  body, 
+  #root {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+    margin: 0;
+    padding: 0;
+  }
+}
+
 .layoutWrapper {
   width: 100%;
-  height: 100vh;
-  max-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   background-color: #f8f9fa; 
-  overflow: hidden; 
+  overflow: hidden !important; 
 }
 
 .contentArea {
@@ -14,12 +25,14 @@
   flex: 1;
   min-height: 0;
   display: flex;
+  overflow: hidden !important;
 }
 
 .workspace {
   display: flex;
   width: 100%;
   height: 100%;
+  overflow: hidden !important;
 }
 
 .caseList {
@@ -36,7 +49,7 @@
 .caseDetails {
   flex: 1;            
   height: 100%;       
-  overflow: hidden;   
+  overflow-y: auto !important;   
   padding: 24px;
   box-sizing: border-box;
   background-color: #f1f3f4; 
@@ -60,87 +73,88 @@
   display: grid;
   grid-template-columns: 1fr 1fr; 
   gap: 16px;
-  flex: 1;         
-  min-height: 0;   
-  height: calc(100% - 140px);
-  align-items: stretch; 
+  width: 100%;
+  height: auto;
+  align-items: start; 
 }
 
 .leftInfoColumn {
   display: flex;
   flex-direction: column;
   gap: 12px; 
-  height: 100%; 
-  min-height: 0;
-  overflow-y: auto; 
-  overflow-x: hidden;
-  
-  &::-webkit-scrollbar { width: 4px; }
-  &::-webkit-scrollbar-thumb { background: #dadce0; border-radius: 4px; }
+  height: auto; 
+  width: 100%;
+  overflow: visible; 
 }
 
 .infoBlock {
   background-color: #ffffff;
   border: 1px solid #e8eaed;
   border-radius: 6px;
-  padding: 12px 16px; 
+  padding: 18px 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  flex: 1;          
-  min-height: 0;    
-  overflow: hidden;
+  width: 100%;
+  height: auto;
+  min-height: 200px;
+  overflow: visible;
 
   h3 {
-    margin: 0 0 8px 0; 
-    font-size: 13px; 
-    color: #5f6368;
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #3c4043;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
+    border-bottom: 1px solid #dadce0;
+    letter-spacing: 0.3px;
   }
 }
 
 .atmBlock {
-  height: 100%;
+  height: auto;
+  min-height: 434px;
 }
 
 .infoRow {
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 40% 60%;
   align-items: center;
-  padding: 8px 0; 
+  padding: 10px 0;
   border-bottom: 1px solid #f1f3f4;
-  font-size: 13px; 
+  font-size: 14px;
 
   &:last-child {
     border-bottom: none;
   }
 
-  .label { 
-    color: #5f6368; 
-    white-space: nowrap; 
-    margin-right: 8px;
-  }
-  
-  .value { 
-    color: #1a202c; 
-    font-weight: 500;
+  .label {
+    color: #6b7280;
     text-align: right;
-    word-break: break-word; 
-  }
-  
-  .success { 
-    color: #137333; 
-    font-weight: 500; 
+    padding-right: 24px;
     white-space: nowrap;
+  }
+
+  .value {
+    color: #111827;
+    font-weight: 500;
+    text-align: left;
+    word-break: break-word;
+  }
+
+  .success {
+    color: #188038;
+    font-weight: 600;
+    text-align: left;
   }
 }
 
 .mapFlexHost {
   width: 100%;
-  flex: 1;            
-  min-height: 0;      
+  height: 340px;      
   border-radius: 4px;
   overflow: hidden;
   border: 1px solid #cbd5e1;
@@ -162,7 +176,6 @@
   font-weight: 500;
 }
 
-// Панель кнопок
 .bottomActions {
   display: flex;
   gap: 12px;
@@ -172,6 +185,7 @@
   flex-shrink: 0; 
   height: 58px;   
   box-sizing: border-box;
+  margin-top: auto;
 
   button {
     flex: 1;          
@@ -255,13 +269,19 @@
     font-weight: 600;
   }
 }
+
+
+
 @media (max-width: 1320px) {
   .caseDetails {
-    height: auto;
-    min-height: 100%;
-    overflow-y: visible !important; 
+    // 🎯 ИСПРАВЛЕНО: Блок держит рамки высоты лэйаута и корректно включает скролл
+    height: 100% !important;
+    max-height: 100% !important;
+    overflow-y: auto !important; 
     padding: 16px;
     gap: 12px;
+    display: flex;
+    flex-direction: column;
   }
 
   .detailTabsHeader {
@@ -273,34 +293,44 @@
   }
 
   .gridInfo {
-    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
     height: auto !important; 
-    flex: none;
+    max-height: none !important;
+    flex: none !important;
     margin-top: 4px;
+    gap: 12px;
   }
 
   .leftInfoColumn {
-    display: flex;
+    display: flex !important;
     flex-direction: column !important;
     gap: 12px;
-    height: auto; 
+    height: auto !important; 
+    max-height: none !important;
     width: 100%;
-    overflow-y: visible; 
+    overflow: visible !important; 
     
     .infoBlock {
-      flex: none;
+      display: flex !important;
+      flex-direction: column !important;
+      flex: none !important;
       width: 100%;
-      height: auto; 
+      height: auto !important; 
+      min-height: 0 !important;
+      max-height: none !important;
+      overflow: visible !important;
     }
   }
 
   .atmBlock {
     width: 100%;
-    height: 380px !important; 
-    flex: none;
+    height: auto !important;
+    min-height: 380px !important;
+    flex: none !important;
     
     .mapFlexHost {
-      height: 100%;
+      height: 280px !important;
       min-height: 280px; 
     }
   }
@@ -310,11 +340,12 @@
   }
 
   .bottomActions {
-    margin-top: 12px;
+    margin-top: 20px;
     height: 58px;
     flex-shrink: 0;
     position: relative;
     border-top: 1px solid #cbd5e1;
+    width: 100%;
   }
 }
 
@@ -324,6 +355,7 @@
     height: auto;
     width: 100%;
   }
+  
   .detailTabsHeader {
     display: flex;
   }
