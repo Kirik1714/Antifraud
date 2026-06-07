@@ -11,7 +11,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [customError, setCustomError] = useState('');
-
+ 
 const navigate = useNavigate();
 const [registerTrigger, { isLoading }] = useRegisterMutation();
  const handleSubmit = async (e) => {

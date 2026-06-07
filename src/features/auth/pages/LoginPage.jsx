@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { User, Lock, Eye, EyeOff } from "lucide-react";
 import styles from "./LoginPage.module.scss";
 import { useLoginMutation } from "../authSlice";
-
+ 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

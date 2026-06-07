@@ -77,13 +77,12 @@ export const authApi = baseApi.injectEndpoints({
         url: '/users/add',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: userData, // Сюда полетят firstName, email, username, password
+        body: userData, 
       }),
     }),
   }),
 });
 
-// Экспортируем готовый хук для компонента страницы и экшены
 export const { useLoginMutation, useRegisterMutation } = authApi;
 export const { logout } = authSlice.actions;
 export default authSlice.reducer;
