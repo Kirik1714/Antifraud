@@ -146,8 +146,8 @@ src/
 │   ├── dashboard/
 │   └── transactions/
 │
-├── utils/
-└── assets/
+├── hooks/
+└── utils/
 ```
 
 ---

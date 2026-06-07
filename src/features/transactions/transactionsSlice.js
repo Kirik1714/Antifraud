@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { clientsApi } from "../clients/clientsSlice";
+import { clientsApi } from "../clients/clientsSlice"; 
 
 const loadStoredStatuses = () => {
   try {
@@ -18,7 +18,7 @@ const saveStatusToStorage = (id, status) => {
   } catch (e) {
     console.error("Storage save error:", e);
   }
-};
+}; 
 
 const initialState = {
   withdraws: [],
@@ -34,22 +34,14 @@ const transactionsSlice = createSlice({
   reducers: {
     updateStatusGlobally: (state, action) => {
       const { id, type, newStatus } = action.payload;
-      console.log(`[Redux + LocalStorage]: Сохраняем статус для ${id} -> ${newStatus}`);
-
       saveStatusToStorage(id, newStatus);
 
       if (type === "Withdraw") {
-        state.withdraws = state.withdraws.map((t) => 
-          t.id === id ? { ...t, status: newStatus } : t
-        );
+        state.withdraws = state.withdraws.map((t) => t.id === id ? { ...t, status: newStatus } : t);
       } else if (type === "Deposit") {
-        state.deposits = state.deposits.map((t) => 
-          t.id === id ? { ...t, status: newStatus } : t
-        );
+        state.deposits = state.deposits.map((t) => t.id === id ? { ...t, status: newStatus } : t);
       } else if (type === "Loan") {
-        state.loans = state.loans.map((t) => 
-          t.id === id ? { ...t, status: newStatus } : t
-        );
+        state.loans = state.loans.map((t) => t.id === id ? { ...t, status: newStatus } : t);
       }
     },
 
@@ -69,7 +61,6 @@ const transactionsSlice = createSlice({
         clientsApi.endpoints.getWithdrawTransactions.matchFulfilled,
         (state, action) => {
           const savedStatuses = loadStoredStatuses();
-
           state.withdraws = action.payload.map(tx => ({
             ...tx,
             status: savedStatuses[tx.id] ? savedStatuses[tx.id] : tx.status
@@ -102,6 +93,22 @@ const transactionsSlice = createSlice({
           if (state.clients.length === 0) {
             state.clients = action.payload.users || [];
             state.isInitialized = true;
+          }
+        }
+      )
+      .addMatcher(
+        clientsApi.endpoints.updateTransactionStatus.matchFulfilled,
+        (state, action) => {
+          const { id, type, status } = action.meta.arg; 
+          
+          saveStatusToStorage(id, status);
+
+          if (type === "Withdraw") {
+            state.withdraws = state.withdraws.map((t) => t.id === id ? { ...t, status } : t);
+          } else if (type === "Deposit") {
+            state.deposits = state.deposits.map((t) => t.id === id ? { ...t, status } : t);
+          } else if (type === "Loan") {
+            state.loans = state.loans.map((t) => t.id === id ? { ...t, status } : t);
           }
         }
       );

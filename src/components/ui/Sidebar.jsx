@@ -37,7 +37,7 @@ export default function Sidebar({ isReviewPage = false }) {
       {!isReviewPage && (
         <div className={`${styles.sidebarHeader} ${isCollapsed ? styles.headerCollapsed : ''}`}>
           {!isCollapsed && <p className={styles.groupTitle}>Fraud Management</p>}
-          <button onClick={toggleSidebar} className={styles.toggleBtn}>
+          <button onClick={toggleSidebar} className={styles.toggleBtn} aria-label="Toggle Sidebar">
             {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
           </button>
         </div>

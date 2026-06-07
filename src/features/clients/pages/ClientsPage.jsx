@@ -59,7 +59,7 @@ export default function ClientsPage() {
                 <span className={styles.label}>Acc ID</span>
                 <input type="text" value={data.widgetId} onChange={(e) => data.setWidgetId(e.target.value)} className={styles.smallInput} placeholder="ID" />
                 <span className={styles.label}>Acc Balance</span>
-                <input type="text" readOnly value={data.widgetBalance} className={`${styles.balanceInput} ${data.singleClient ? styles.amountDeposit : styles.amountWithdraw}`}/>
+                <input type="text" readOnly value={data.widgetBalance} className={`${styles.balanceInput} ${data.singleClient ? styles.amountDeposit : styles.amountWithdraw}`} aria-label="Customer Account Balance"/>
               </div>
             </div>
 

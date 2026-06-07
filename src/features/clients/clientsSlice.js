@@ -4,23 +4,21 @@ export const clientsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getClients: builder.query({
       query: ({ limit = 10, skip = 0 }) => `/users?limit=${limit}&skip=${skip}`,
-      providesTags: ["User"],
+      providesTags: ["Clients"], 
     }),
 
     getSingleClient: builder.query({
       query: (id) => `/users/${id}`,
-      providesTags: (result, error, id) => [{ type: "User", id }],
+      providesTags: (result, error, id) => [{ type: "Clients", id }],
     }),
+
     getWithdrawTransactions: builder.query({
       query: () => "/carts",
       transformResponse: (response) => {
         return response.carts.map((cart) => {
           let status = "Approved";
-          if (cart.total > 2000) {
-            status = "Fraud"; 
-          } else if (cart.total > 800) {
-            status = "High Risk"; 
-          }
+          if (cart.total > 2000) status = "Fraud"; 
+          else if (cart.total > 800) status = "High Risk"; 
 
           return {
             id: `TX-WID${cart.id}`,
@@ -35,6 +33,7 @@ export const clientsApi = baseApi.injectEndpoints({
       },
       providesTags: ["Transactions"],
     }),
+
     getDepositTransactions: builder.query({
       query: () => "/products?limit=15",
       transformResponse: (response) => {
@@ -49,6 +48,7 @@ export const clientsApi = baseApi.injectEndpoints({
       },
       providesTags: ["Transactions"],
     }),
+
     getLoanTransactions: builder.query({
       query: () => "/quotes?limit=10",
       transformResponse: (response) => {
@@ -70,6 +70,7 @@ export const clientsApi = baseApi.injectEndpoints({
       },
       providesTags: ["Transactions"],
     }),
+
     updateTransactionStatus: builder.mutation({
       query: ({ id, type, status }) => ({
         url: `/transactions/${type.toLowerCase()}s/${id}`,
