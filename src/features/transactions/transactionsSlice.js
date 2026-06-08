@@ -10,6 +10,7 @@ const loadStoredStatuses = () => {
   }
 };
 
+
 const saveStatusToStorage = (id, status) => {
   try {
     const current = loadStoredStatuses();
@@ -28,10 +29,12 @@ const initialState = {
   isInitialized: false,
 };
 
+
 const transactionsSlice = createSlice({
   name: "transactions",
   initialState,
   reducers: {
+    // Manually forces a status rewrite inside the Redux memory maps and local storage
     updateStatusGlobally: (state, action) => {
       const { id, type, newStatus } = action.payload;
       saveStatusToStorage(id, newStatus);
@@ -45,6 +48,7 @@ const transactionsSlice = createSlice({
       }
     },
 
+    // Handles client balance updates during automated fraud reversals
     updateClientBalanceGlobally: (state, action) => {
       const { clientId, amount } = action.payload;
       state.clients = state.clients.map((client) => 
@@ -53,10 +57,12 @@ const transactionsSlice = createSlice({
           : client
       );
     }
-  },
+  }, 
   
+  // Intercept layer: listens to incoming RTK Query payloads before they reach presentational nodes
   extraReducers: (builder) => {
     builder
+      // Intercepts resolved withdrawals stream and injects disk-stored manual status overrides
       .addMatcher(
         clientsApi.endpoints.getWithdrawTransactions.matchFulfilled,
         (state, action) => {
@@ -67,6 +73,7 @@ const transactionsSlice = createSlice({
           }));
         }
       )
+      // Intercepts resolved deposits stream and injects disk-stored manual status overrides
       .addMatcher(
         clientsApi.endpoints.getDepositTransactions.matchFulfilled,
         (state, action) => {
@@ -77,6 +84,7 @@ const transactionsSlice = createSlice({
           }));
         }
       )
+      // Intercepts resolved loans stream and injects disk-stored manual status overrides
       .addMatcher(
         clientsApi.endpoints.getLoanTransactions.matchFulfilled,
         (state, action) => {
@@ -87,6 +95,7 @@ const transactionsSlice = createSlice({
           }));
         }
       )
+      // Caches primary client directory lists inside local store partitions once upon application launch
       .addMatcher(
         clientsApi.endpoints.getClients.matchFulfilled,
         (state, action) => {
@@ -96,10 +105,11 @@ const transactionsSlice = createSlice({
           }
         }
       )
+      // Monitors active server mutations to append analyst decisions onto the local storage ledger
       .addMatcher(
         clientsApi.endpoints.updateTransactionStatus.matchFulfilled,
         (state, action) => {
-          const { id, type, status } = action.meta.arg; 
+          const { id, type, status } = action.meta.arg; // Extract original arguments sent during the dispatch trigger
           
           saveStatusToStorage(id, status);
 

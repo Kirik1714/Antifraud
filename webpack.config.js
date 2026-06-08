@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 // Optimization plugins to dramatically improve Lighthouse Performance score
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -104,6 +105,17 @@ module.exports = {
         removeRedundantAttributes: true,
       } : false,
     }),
+    new CopyPlugin({
+    patterns: [
+      { 
+        from: "public", 
+        to: "", 
+        globOptions: {
+          ignore: ["**/index.html"], 
+        },
+      },
+    ],
+  }),
     
     // Only extract CSS styles into standalone stylesheets during production builds
     isProduction && new MiniCssExtractPlugin({

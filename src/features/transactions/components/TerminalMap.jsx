@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl } from 'rea
 import L from 'leaflet';
 import styles from './TerminalMap.module.scss';
 
+// Generate a custom SVG icon that replicates the modern Google Maps red pin layout
 const googleLikeRedIcon = L.divIcon({
   html: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ea4335" width="38px" height="38px">
@@ -11,31 +12,40 @@ const googleLikeRedIcon = L.divIcon({
   `,
   className: '',
   iconSize: [38, 38],
-  iconAnchor: [19, 38],
-  popupAnchor: [0, -34]
+  iconAnchor: [19, 38], 
+  popupAnchor: [0, -34] 
 });
 
+// Global runtime cache object to prevent redundant API geocoding hits for the same address string
 const geoCache = {};
 
+/**
+ * Sub-component that handles programmatic map viewport adjustments.
+ * Must reside inside <MapContainer> to safely access Leaflet hook bindings.
+ */
 function MapRefresher({ center }) {
-  const map = useMap();
+  const map = useMap(); // Pulls the underlying active Leaflet map engine instance
   
   useEffect(() => {
     if (center) {
-      map.invalidateSize();
-      map.setView(center, 16, { animate: true, duration: 0.8 });
+      map.invalidateSize(); // Fixes the common Leaflet bug where maps render half-gray inside hidden tabs
+      map.setView(center, 16, { animate: true, duration: 0.8 }); // Smooth fly-to animation to new coordinates
     }
   }, [center, map]);
 
-  return null;
+  return null; // Logic-only controller, renders no visible layout nodes
 }
 
+/**
+ * Custom crosshair overlay control button.
+ * Smoothly re-centers the viewport back onto the incident marker location if the analyst panned away.
+ */
 function LocationButton({ center }) {
   const map = useMap();
 
   const handleRecenter = (e) => {
     e.preventDefault();
-    e.stopPropagation();
+    e.stopPropagation(); // Stop click interactions from bubbling up and firing on the map canvas
     if (center) {
       map.setView(center, 16, { animate: true, duration: 0.6 });
     }
@@ -56,24 +66,33 @@ function LocationButton({ center }) {
   );
 }
 
+/**
+ * Primary presentational component for terminal location maps.
+ * Automatically translates textual addresses into geographical spatial markers.
+ */
 export default function TerminalMap({ cityName, addressText }) {
+  // Local state initialized to default backup coordinates (Phoenix, AZ fallback)
   const [position, setPosition] = useState([33.448376, -112.074036]);
 
   useEffect(() => {
+
     const query = cityName && addressText ? `${addressText}, ${cityName}` : (cityName || "Phoenix");
     
+    // Short-circuit: if coordinates for this specific string exist in cache, load them immediately
     if (geoCache[query]) {
       setPosition(geoCache[query]);
       return;
     }
 
+    // Hit OpenStreetMap's free Nominatim forward geocoding API endpoint to fetch spatial data objects
     fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`)
       .then((res) => res.json())
       .then((data) => {
         if (data && data[0]) {
+          // Parse string metrics back to floating-point numerical coordinates array format
           const coords = [parseFloat(data[0].lat), parseFloat(data[0].lon)];
-          geoCache[query] = coords;
-          setPosition(coords);
+          geoCache[query] = coords; // Commit results to local memory registry
+          setPosition(coords);      // Refresh reactive UI node state targets
         }
       })
       .catch((err) => console.error("OSM Geocoding Error:", err));
@@ -84,21 +103,26 @@ export default function TerminalMap({ cityName, addressText }) {
       <MapContainer 
         center={position} 
         zoom={16} 
-        scrollWheelZoom={false}
-        zoomControl={false} 
+        scrollWheelZoom={false} // Disable intrusive zoom-actions when scrolling the browser window layout
+        zoomControl={false}       // Hide standard top-left zoom layout to introduce custom position rules
         className={styles.leafletContainerHost}
       >
+        {/* Render minimalist, clean map tile imagery patterns hosted by CARTO Voyager series */}
         <TileLayer
           attribution='&copy; <a href="https://carto.com/">CARTO</a>'
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
         />
         
+        {/* Register viewport animation fly-to handlers */}
         <MapRefresher center={position} />
         
+        {/* Register custom locator hotkeys */}
         <LocationButton center={position} />
         
+        {/* Relocate default zoom triggers to the bottom right corner for better dashboard aesthetics */}
         <ZoomControl position="bottomright" />
         
+        {/* Inject our modern custom SVG marker target pin onto computed position coordinates */}
         <Marker position={position} icon={googleLikeRedIcon}>
           <Popup>
             <b>{addressText || "Target Terminal"}</b><br />{cityName}

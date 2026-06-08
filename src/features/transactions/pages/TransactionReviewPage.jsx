@@ -53,7 +53,7 @@ export default function TransactionReviewPage() {
                   onClick={() => data.setActiveDetailTab("info")}
                 >
                   Scoring Info
-                </button>
+                </button> 
                 <button
                   className={`${styles.detailTabBtn} ${data.activeDetailTab === "map" ? styles.activeDetailTab : ""}`}
                   onClick={() => data.setActiveDetailTab("map")}

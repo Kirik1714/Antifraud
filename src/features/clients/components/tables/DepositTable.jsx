@@ -34,7 +34,7 @@ export default function DepositTable({ transactions }) {
         </tbody>
       </table>
 
-      <div className={styles.mobileCardsGrid}>
+      <div className={styles.mobileCardsGrid}> 
         {transactions?.map((tx) => (
           <div key={tx.id} className={`${styles.mobileCard} ${styles.rowApproved}`}>
             <div className={styles.cardHeader}>
