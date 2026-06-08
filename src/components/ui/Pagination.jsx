@@ -71,6 +71,7 @@ export default function Pagination({
               setCurrentPage(1);
               setLimit(Number(e.target.value));
             }}
+            aria-label="Select number of entries per page"
           >
             <option value={10}>10 entries per page</option>
             <option value={25}>25 entries per page</option>
