@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../../pages/ClientsPage.module.scss';
-import { ArrowUpRight, ArrowDownLeft, Percent } from 'lucide-react';
+import { ArrowUpRight, ArrowDownLeft, Percent } from '../../../../components/ui/Icons';
 
 export default function HistoryTable({ transactions }) {
   const getStatusClass = (status) => {

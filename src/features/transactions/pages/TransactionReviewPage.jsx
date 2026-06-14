@@ -1,6 +1,6 @@
 import React from "react";
 import { formatTxDate } from "../../../utils/dateUtils";
-import { useTransactionReview } from "../../../hooks/useTransactionReview";
+import { useTransactionReview } from "../../../hooks/transactions/useTransactionReview";
 
 import CaseListItem from "../components/CaseListItem";
 import CaseDetailsHeader from "../components/CaseDetailsHeader";
@@ -25,6 +25,8 @@ export default function TransactionReviewPage() {
     <div className={styles.layoutWrapper}>
       <div className={styles.contentArea}>
         <div className={styles.workspace}>
+          
+          {/* LEFT PANEL: Case backlog queue */}
           <div className={styles.caseList}>
             {data.allCases.map((c) => (
               <CaseListItem
@@ -37,11 +39,13 @@ export default function TransactionReviewPage() {
             ))}
           </div>
 
+          {/* RIGHT PANEL: Case investigation details */}
           {data.currentCase ? (
             <div className={styles.caseDetails}>
               <div className={styles.alertHeader}>
                 Fraudulent Activity Alert
               </div>
+              
               <CaseDetailsHeader
                 currentCase={data.currentCase}
                 currentClient={data.currentClient}
@@ -63,6 +67,7 @@ export default function TransactionReviewPage() {
               </div>
 
               <div className={styles.gridInfo}>
+                {/* View A: Text details block */}
                 <div className={`${styles.leftInfoColumn} ${data.activeDetailTab === "info" ? "" : styles.hideOnTabToggle}`}>
                   <div className={styles.infoBlock}>
                     <h3>Summary</h3>
@@ -114,6 +119,7 @@ export default function TransactionReviewPage() {
                   </div>
                 </div>
 
+                {/* View B: Geospatial map component */}
                 <div className={`${styles.infoBlock} ${styles.atmBlock} ${data.activeDetailTab === "map" ? "" : styles.hideOnTabToggle}`}>
                   <h3>ATM</h3>
                   <div className={styles.atmAddressText}>

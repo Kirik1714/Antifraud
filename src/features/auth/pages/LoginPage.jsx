@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { User, Lock, Eye, EyeOff } from "lucide-react";
+import { User, LockIcon, EyeIcon, EyeOffIcon } from "../../../components/ui/Icons";
 import styles from "./LoginPage.module.scss";
 import { useLoginMutation } from "../authSlice";
  
@@ -33,7 +33,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className={styles.authContainer}>
+    <main className={styles.authContainer}>
       <div className={styles.authCard}>
         <h2>Login to Your Account</h2>
         <p>Secure login to manage antifraud system</p>
@@ -56,7 +56,7 @@ export default function LoginPage() {
           </div>
 
           <div className={styles.inputGroup}>
-            <Lock className={styles.fieldIcon} size={18} />
+            <LockIcon className={styles.fieldIcon} size={18} />
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
@@ -70,8 +70,9 @@ export default function LoginPage() {
               className={styles.eyeIcon}
               onClick={() => setShowPassword(!showPassword)}
               disabled={isLoading}
+              aria-label={showPassword ? "Hide password" : "Show password"} 
             >
-              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              {showPassword ? <EyeOffIcon size={18} /> : <EyeIcon size={18} />}
             </button>
           </div>
 
@@ -97,6 +98,6 @@ export default function LoginPage() {
           <Link to="/register">Register Now</Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { User, MailIcon, LockIcon, EyeIcon, EyeOffIcon } from '../../../components/ui/Icons';
 import styles from './RegisterPage.module.scss'; 
 import { useRegisterMutation } from '../authSlice';
 
@@ -40,7 +40,7 @@ const [registerTrigger, { isLoading }] = useRegisterMutation();
   };
 
  return (
-    <div className={styles.authContainer}>
+    <main className={styles.authContainer}>
       <div className={styles.authCard}>
         <h2>Create New Account</h2>
         <p>Register a new profile analyst</p>
@@ -61,7 +61,7 @@ const [registerTrigger, { isLoading }] = useRegisterMutation();
           </div>
 
           <div className={styles.inputGroup}>
-            <Mail className={styles.fieldIcon} size={18} />
+            <MailIcon className={styles.fieldIcon} size={18} />
             <input 
               type="email" 
               placeholder="Email Address" 
@@ -85,7 +85,7 @@ const [registerTrigger, { isLoading }] = useRegisterMutation();
           </div>
 
           <div className={styles.inputGroup}>
-            <Lock className={styles.fieldIcon} size={18} />
+            <LockIcon className={styles.fieldIcon} size={18} />
             <input 
               type={showPassword ? "text" : "password"} 
               placeholder="Password" 
@@ -99,8 +99,9 @@ const [registerTrigger, { isLoading }] = useRegisterMutation();
               className={styles.eyeIcon}
               onClick={() => setShowPassword(!showPassword)}
               disabled={isLoading}
+              aria-label={showPassword ? "Hide password" : "Show password"} 
             >
-              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              {showPassword ? <EyeOffIcon size={18} /> : <EyeIcon size={18} />}
             </button>
           </div>
 
@@ -114,6 +115,6 @@ const [registerTrigger, { isLoading }] = useRegisterMutation();
           <Link to="/login">Login here</Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

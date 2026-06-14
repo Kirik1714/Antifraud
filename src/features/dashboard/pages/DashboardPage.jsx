@@ -1,5 +1,6 @@
 import React from "react";
-import { ArrowLeftRight, Percent, Hourglass, X, Loader } from "lucide-react";
+// Импортируем строго те имена, которые задекларированы в твоем файле утилит
+import { ArrowLeftRight, Percent, Hourglass, XIcon, LoaderIcon } from "../../../components/ui/Icons";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
@@ -13,21 +14,23 @@ const PIE_COLORS = ['#1a73e8', '#7bb1f5', '#cbdff9'];
 export default function DashboardPage() {
   const data = useDashboardData();
 
+  // Loading state boundary view while HTTP responses are pending
   if (data.isLoading) {
     return (
-      <div className={`${styles.dashboardContainer} ${styles.containerCentered}`}>
-        <Loader size={64} className={`${styles.iconOrange} ${styles.spinnerRotate}`} />
-        <p className={styles.loadingText}>Загрузка финансовых транзакций...</p>
-      </div>
+      <main className={`${styles.dashboardContainer} ${styles.containerCentered}`}>
+        <LoaderIcon size={64} className={`${styles.iconOrange} ${styles.spinnerRotate}`} />
+        <p className={styles.loadingText}>Syncing financial transaction ledgers...</p>
+      </main>
     );
   }
 
   return (
-    <div className={styles.dashboardContainer}>
+    <main className={styles.dashboardContainer}>
       <h1 className={styles.dashboardTitle}>FRAUD MANAGEMENT DASHBOARD</h1>
 
       <div className={styles.dashboardGrid}>
         
+        {/* COMPONENT A: Total financial volume breakdown pie chart overview */}
         <DashboardCard className={styles.mainPieCard} styles={styles}>
           <p className={styles.cardTitle}>Processed Transactions</p>
           <div className={styles.pieChartWrapper}>
@@ -52,20 +55,30 @@ export default function DashboardPage() {
           </div>
           <div className={styles.pieCounterSection}>
             <h2 className={styles.mainTotalValue}>
-              {data.totalCount.toLocaleString("fr-FR")}
+              {data.totalCount.toLocaleString("en-US")}
             </h2>
             <div className={styles.legendList}>
-              <div className={styles.legendItem}><span className={`${styles.dot} ${styles.dotDeposits}`}></span><span>Deposits</span></div>
-              <div className={styles.legendItem}><span className={`${styles.dot} ${styles.dotLoans}`}></span><span>Loans</span></div>
-              <div className={styles.legendItem}><span className={`${styles.dot} ${styles.dotWithdrawals}`}></span><span>Withdrawals</span></div>
+              <div className={styles.legendItem}>
+                <span className={`${styles.dot} ${styles.dotDeposits}`}></span>
+                <span>Deposits</span>
+              </div>
+              <div className={styles.legendItem}>
+                <span className={`${styles.dot} ${styles.dotLoans}`}></span>
+                <span>Loans</span>
+              </div>
+              <div className={styles.legendItem}>
+                <span className={`${styles.dot} ${styles.dotWithdrawals}`}></span>
+                <span>Withdrawals</span>
+              </div>
             </div>
           </div>
         </DashboardCard>
 
+        {/* COMPONENT B: High-level quantitative status summary cards metrics */}
         <StatCard 
           icon={ArrowLeftRight} 
           iconClass="iconBlue" 
-          value={data.totalCount.toLocaleString("fr-FR")} 
+          value={data.totalCount.toLocaleString("en-US")} 
           title="All transactions" 
           styles={styles} 
         />
@@ -79,7 +92,7 @@ export default function DashboardPage() {
         <StatCard 
           icon={Hourglass} 
           iconClass="iconLightBlue" 
-          value={data.pendingCount} 
+          value={data.pendingCount.toLocaleString("en-US")} 
           title="Pending Approval" 
           styles={styles} 
         />
@@ -89,7 +102,7 @@ export default function DashboardPage() {
             <div className={styles.progressCircleSizeHost}> 
               <CircularProgressbar
                 value={data.safePercentage} 
-                text={data.approvedCount.toLocaleString("fr-FR")} 
+                text={data.approvedCount.toLocaleString("en-US")} 
                 styles={buildStyles({
                   pathColor: '#45D700',   
                   trailColor: '#ff5c5c',  
@@ -104,24 +117,25 @@ export default function DashboardPage() {
         </DashboardCard>
 
         <DashboardCard isActionCard styles={styles}>
-          <div className={`${styles.iconWrapper} ${styles.iconRed}`}><X size={40} /></div>
+          <div className={`${styles.iconWrapper} ${styles.iconRed}`}><XIcon size={40} /></div>
           <div className={styles.cardContent}>
-            <h2 className={styles.cardValue}>{data.rejectedCount}</h2>
+            <h2 className={styles.cardValue}>{data.rejectedCount.toLocaleString("en-US")}</h2>
             <p className={styles.cardSub}>Rejected Transactions</p>
           </div>
           <button className={styles.analyzeBtn}>Analyze</button>
         </DashboardCard>
 
         <DashboardCard isActionCard styles={styles}>
-          <div className={`${styles.iconWrapper} ${styles.iconOrange} ${styles.spinnerRotate}`}><Loader size={40} /></div>
+
+          <div className={`${styles.iconWrapper} ${styles.iconOrange} ${styles.spinnerRotate}`}><LoaderIcon size={40} /></div>
           <div className={styles.cardContent}>
-            <h2 className={styles.cardValue}>{data.postponedCount}</h2>
+            <h2 className={styles.cardValue}>{data.postponedCount.toLocaleString("en-US")}</h2>
             <p className={styles.cardSub}>Postponed Approval</p>
           </div>
           <button className={styles.analyzeBtn}>Analyze</button>
         </DashboardCard>
 
       </div>
-    </div>
+    </main>
   );
 }

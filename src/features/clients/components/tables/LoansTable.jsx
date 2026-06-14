@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../../pages/ClientsPage.module.scss';
-import { AlertTriangle, ShieldCheck, ShieldAlert } from 'lucide-react';
+import { AlertTriangle, ShieldCheck, ShieldAlert } from '../../../../components/ui/Icons';
 
 export default function LoansTable({ transactions }) {
   const getRowClass = (status) => {

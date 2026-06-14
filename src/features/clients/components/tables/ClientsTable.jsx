@@ -1,30 +1,8 @@
 import React from 'react';
 import styles from '../../pages/ClientsPage.module.scss';
 
-export default function ClientsTable({ filteredUsers, deposits, withdraws, loans }) {
+export default function ClientsTable({ filteredUsers }) {
   
-  const calculateUserBalance = (userId) => {
-    if (!deposits || !withdraws || !loans) return 'Calculating...';
-
-    const startBalance = filteredUsers.find(u => u.id === userId)?.age * 1234 || 0;
-
-    const totalDeposits = deposits
-      .filter(tx => tx.clientId === userId && tx.status === 'Approved')
-      .reduce((sum, tx) => sum + tx.amount, 0);
-
-    const totalLoans = loans
-      .filter(tx => tx.clientId === userId && tx.status === 'Approved')
-      .reduce((sum, tx) => sum + tx.amount, 0);
-
-    const totalWithdraws = withdraws
-      .filter(tx => tx.clientId === userId && tx.status === 'Approved')
-      .reduce((sum, tx) => sum + tx.amount, 0);
-
-    const finalSum = startBalance + totalDeposits + totalLoans - totalWithdraws;
-
-    return `$${finalSum.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
-  };
-
   return (
     <div className={styles.tableContainer}>
       <table className={styles.clientsTable}>
@@ -49,8 +27,9 @@ export default function ClientsTable({ filteredUsers, deposits, withdraws, loans
                 <td className={styles.uppercaseText}>{user.address?.stateCode || 'NY'}</td>
                 <td>{user.address?.address || 'N/A'}</td>
                 <td>{user.phone}</td>
+                
                 <td className={`${styles.boldText} ${styles.balancePositive}`}>
-                  {calculateUserBalance(user.id)}
+                  {`$${user.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}`}
                 </td>
               </tr>
             ))

@@ -9,7 +9,25 @@ Built from scratch using React, Redux Toolkit, RTK Query, and Webpack with a Fea
 https://antifraud-one.vercel.app/
 
 ---
+## 📊 Lighthouse Performance Audit
 
+The application was audited using Google Lighthouse to validate performance, accessibility, best practices, and SEO quality across major application pages.
+
+### Login Page
+![Login Audit](docs/screenshots/login.png)
+
+### Registration Page
+![Registration Audit](docs/screenshots/register.png)
+
+### Dashboard
+![Dashboard Audit](docs/screenshots/dashboard.png)
+
+### Clients
+![Clients Audit](docs/screenshots/clients.png)
+
+### Transactions
+![Transactions Audit](docs/screenshots/transactions.png)
+---
 ## 🚀 Key Features
 
 ### Authentication & Security

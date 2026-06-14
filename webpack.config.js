@@ -79,6 +79,13 @@ module.exports = {
           "sass-loader",
         ],
       },
+      {
+        test: /\.css$/i,
+        use: [
+          isProduction ? MiniCssExtractPlugin.loader : "style-loader",
+          "css-loader" // Здесь sass-loader не нужен, так как это чистый CSS!
+        ],
+      },
 
       // IMAGE ASSETS
       {

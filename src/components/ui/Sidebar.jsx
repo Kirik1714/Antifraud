@@ -9,8 +9,8 @@ import {
   ChevronDown,
   ChevronLeft, 
   ChevronRight,
-  Users
-} from 'lucide-react';
+  User
+} from '../ui/Icons';
 import styles from './Sidebar.module.scss';
 
 export default function Sidebar({ isReviewPage = false }) {
@@ -60,7 +60,7 @@ export default function Sidebar({ isReviewPage = false }) {
           onClick={() => navigate('/clients')}
           title="Clients Database"
         >
-          <Users size={18} />
+          <User size={18} />
           <span className={styles.menuText}>Clients</span>
         </div>
         

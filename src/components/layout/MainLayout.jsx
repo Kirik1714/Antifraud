@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { ChevronDown, User, LogOut } from "lucide-react";
+import { ChevronDown, User, LogOutIcon } from "../ui/Icons";
 import { logout } from "../../features/auth/authSlice";
 
 import Sidebar from "../ui/Sidebar";
@@ -83,7 +83,7 @@ export default function MainLayout() {
           {isAuthenticated && isDropdownOpen && (
             <div className={styles.dropdownMenu}>
               <button onClick={handleLogout} className={styles.logoutBtn}>
-                <LogOut size={14} />
+                <LogOutIcon size={14} />
                 <span>Log Out</span>
               </button>
             </div>

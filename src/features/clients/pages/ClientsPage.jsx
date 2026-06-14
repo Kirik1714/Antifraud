@@ -1,5 +1,6 @@
 import React from "react";
-import { Search } from "lucide-react";
+// Импортируем LoaderIcon вместе с Search из нашего единого файла иконок
+import { Search, LoaderIcon } from "../../../components/ui/Icons"; 
 
 import TopNavigation from "../components/TopNavigation";
 import MobileClientsCards from "../components/tables/MobileClientsCards";
@@ -10,12 +11,22 @@ import LoansTable from "../components/tables/LoansTable";
 import HistoryTable from "../components/tables/HistoryTable";
 import Pagination from "../../../components/ui/Pagination";
 import styles from "./ClientsPage.module.scss";
-import { useClientsPageData } from "../../../hooks/useClientsPageData";
+import { useClientsPageData } from "../../../hooks/clients/useClientsPageData";
+import { getSearchPlaceholder } from "../../../utils/clientsUtils";
 
 export default function ClientsPage() {
   const data = useClientsPageData();
 
-  if (data.isClientsLoading) return <div className={styles.centered}>Loading database...</div>;
+  // Идеальный центрированный лоадер с фирменной крутящейся иконкой
+  if (data.isClientsLoading) {
+    return (
+      <div className={styles.centered}>
+        <LoaderIcon size={64} className={`${styles.iconOrange} ${styles.spinnerRotate}`} />
+        <p className={styles.loadingText}>Syncing customer profile records...</p>
+      </div>
+    );
+  }
+
   if (data.clientsError) return <div className={styles.centeredError}>Error loading data.</div>;
 
   const renderActiveTable = () => {
@@ -25,7 +36,7 @@ export default function ClientsPage() {
 
     switch (data.activeTab) {
       case "Clients":
-        return <ClientsTable filteredUsers={data.filteredUsers} deposits={data.allDeposits} withdraws={data.allWithdraws} loans={data.allLoans} />;
+        return <ClientsTable filteredUsers={data.filteredUsers} />;
       case "Deposit":
         return <DepositTable transactions={data.paginatedDeposits.items} />;
       case "Withdraw":
@@ -49,7 +60,7 @@ export default function ClientsPage() {
           <div className={styles.toolbar}>
             <div className={styles.searchBox}>
               <Search size={16} className={styles.searchIcon} />
-              <input type="text" placeholder="Search..." value={data.searchTerm} onChange={(e) => data.setSearchTerm(e.target.value)} />
+              <input type="text" placeholder={getSearchPlaceholder(data.activeTab)} value={data.searchTerm} onChange={(e) => data.setSearchTerm(e.target.value)} />
             </div>
 
             <div className={styles.balanceContainer}>

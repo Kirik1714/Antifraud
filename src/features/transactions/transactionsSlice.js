@@ -106,22 +106,22 @@ const transactionsSlice = createSlice({
         }
       )
       // Monitors active server mutations to append analyst decisions onto the local storage ledger
-      .addMatcher(
-        clientsApi.endpoints.updateTransactionStatus.matchFulfilled,
-        (state, action) => {
-          const { id, type, status } = action.meta.arg; // Extract original arguments sent during the dispatch trigger
+      // .addMatcher(
+      //   clientsApi.endpoints.updateTransactionStatus.matchFulfilled,
+      //   (state, action) => {
+      //     const { id, type, status } = action.meta.arg; // Extract original arguments sent during the dispatch trigger
           
-          saveStatusToStorage(id, status);
+      //     saveStatusToStorage(id, status);
 
-          if (type === "Withdraw") {
-            state.withdraws = state.withdraws.map((t) => t.id === id ? { ...t, status } : t);
-          } else if (type === "Deposit") {
-            state.deposits = state.deposits.map((t) => t.id === id ? { ...t, status } : t);
-          } else if (type === "Loan") {
-            state.loans = state.loans.map((t) => t.id === id ? { ...t, status } : t);
-          }
-        }
-      );
+      //     if (type === "Withdraw") {
+      //       state.withdraws = state.withdraws.map((t) => t.id === id ? { ...t, status } : t);
+      //     } else if (type === "Deposit") {
+      //       state.deposits = state.deposits.map((t) => t.id === id ? { ...t, status } : t);
+      //     } else if (type === "Loan") {
+      //       state.loans = state.loans.map((t) => t.id === id ? { ...t, status } : t);
+      //     }
+      //   }
+      // );
   }
 });
 

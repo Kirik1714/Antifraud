@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../../pages/ClientsPage.module.scss';
-import { ShieldCheck } from 'lucide-react';
+import {ShieldCheck} from '../../../../components/ui/Icons'
 
 export default function DepositTable({ transactions }) {
   return (

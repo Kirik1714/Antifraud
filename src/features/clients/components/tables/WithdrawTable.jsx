@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../../pages/ClientsPage.module.scss';
-import { AlertTriangle, ShieldCheck, ShieldAlert } from 'lucide-react';
+import { AlertTriangle, ShieldCheck, ShieldAlert } from '../../../../components/ui/Icons';
 import { useNavigate } from 'react-router-dom';
 
 export default function WithdrawTable({ transactions }) { 

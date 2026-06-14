@@ -62,7 +62,7 @@
     border: 1px solid #ced4da;
     border-radius: 4px;
     font-size: 14px;
-    width: 220px; 
+    width: 240px; 
     outline: none;
     color: #495057;
     transition: all 0.2s ease;
@@ -376,9 +376,39 @@
 }
 
 .centered {
-  margin: auto;
-  font-size: 16px;
-  color: #495057;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  min-height: 400px; /* Занимает всю центральную область */
+  width: 100%;
+  
+  .iconOrange {
+    stroke: #ff9800; /* Приятный оранжевый цвет бренда */
+  }
+
+  // Запускаем бесконечное вращение для SVG
+  .spinnerRotate {
+    animation: spin 1s infinite linear;
+  }
+
+  .loadingText {
+    margin-top: 16px;
+    font-size: 16px;
+    color: #4a5568;
+    font-weight: 500;
+  }
+}
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .centeredError {
